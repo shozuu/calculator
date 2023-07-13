@@ -13,10 +13,18 @@ const resultScreen = document.querySelector('.result');
 
 
 numberKeys.forEach(key => {
-    key.addEventListener('click', () => getNumber)
+    key.addEventListener('click', (e) => {
+        let number = parseFloat(e.target.textContent);
+        getNumber(number)
+    })
 });
 
-
+function getNumber(number){
+    if (resultScreen.textContent === '0')
+        resultScreen.textContent = number;
+    else
+        resultScreen.textContent += number; 
+}
 
 function operate(operator, a, b){
     switch(operator)
@@ -38,8 +46,6 @@ function operate(operator, a, b){
             break;
     }
 }
-
-
 
 function add(a, b){
     return a + b;
