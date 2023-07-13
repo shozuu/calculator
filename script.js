@@ -14,8 +14,7 @@ const resultScreen = document.querySelector('.result');
 
 numberKeys.forEach(key => {
     key.addEventListener('click', (e) => {
-        let number = parseFloat(e.target.textContent);
-        getNumber(number)
+        getNumber(e.target.textContent)
     })
 });
 
@@ -24,6 +23,8 @@ function getNumber(number){
         resultScreen.textContent = number;
     else
         resultScreen.textContent += number; 
+
+    number = parseFloat(resultScreen.textContent);
 }
 
 function operate(operator, a, b){
