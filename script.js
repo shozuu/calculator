@@ -1,5 +1,6 @@
 let num1 = 0;
 let num2 = 0;
+let initialOperator = '';
 let currentOperator = '';
 let gotOperand = false; //reset when clear 
 
@@ -36,17 +37,22 @@ operatorKeys.forEach(operator => {
 
 function getOperator(operator){
     num1 = parseFloat(resultScreen.textContent);
+
+    initialOperator = currentOperator;
     currentOperator = operator;
+
     feedbackScreen.textContent = `${num1}` + ` ${currentOperator}`
     num2 = parseFloat(resultScreen.textContent);
     gotOperand = true; //trigger that num1 has already been stored and reset the screen when new number enters
 }
 
-equalsKey.addEventListener('click', () => {
+equalsKey.addEventListener('click', getOperate)
+
+function getOperate(){
     num2 = parseFloat(resultScreen.textContent);
     feedbackScreen.textContent = `${num1}` + ` ${currentOperator} ` + `${num2} =`;
     resultScreen.textContent = `${operate(currentOperator, num1, num2)}`
-})
+}
 
 function operate(operator, a, b){
     switch(operator)
