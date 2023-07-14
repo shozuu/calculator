@@ -40,6 +40,12 @@ function getOperator(operator){
     gotNum1 = true; //trigger that num1 has already been stored and reset the screen when new number enter
 }
 
+equalsKey.addEventListener('click', () => {
+    num2 = parseFloat(resultScreen.textContent);
+    feedbackScreen.textContent = `${num1}` + ` ${currentOperator} ` + `${num2} =`;
+    resultScreen.textContent = `${operate(currentOperator, num1, num2)}`
+})
+
 function operate(operator, a, b){
     switch(operator)
     {
