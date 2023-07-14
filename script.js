@@ -1,6 +1,7 @@
 let num1 = 0;
 let num2 = 0;
-let operand = '';
+let currentOperator = '';
+let gotNum1 = false; //reset when clear 
 
 const numberKeys = document.querySelectorAll('.number.key');
 const operatorKeys = document.querySelectorAll('.operator.key');
@@ -19,12 +20,24 @@ numberKeys.forEach(key => {
 });
 
 function getNumber(number){
-    if (resultScreen.textContent === '0')
+    if (resultScreen.textContent === '0' || gotNum1 === true)
         resultScreen.textContent = number;
     else
         resultScreen.textContent += number; 
+}
 
-    number = parseFloat(resultScreen.textContent);
+operatorKeys.forEach(operator => {
+    operator.addEventListener('click', (e) => {
+        getOperator(e.target.textContent)
+    })
+});
+
+function getOperator(operator){
+    num1 = parseFloat(resultScreen.textContent);
+    currentOperator = operator;
+    feedbackScreen.textContent = `${num1}` + ` ${currentOperator}`
+    num2 = parseFloat(resultScreen.textContent);
+    gotNum1 = true; //trigger that num1 has already been stored and reset the screen when new number enter
 }
 
 function operate(operator, a, b){
@@ -40,9 +53,9 @@ function operate(operator, a, b){
 
         case 'x':
             multiply(a, b);
-            break; 
+            break;
 
-        case '+':
+        case '÷':
             divide(a, b);
             break;
     }
