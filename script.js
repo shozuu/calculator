@@ -1,7 +1,7 @@
 let num1 = 0;
 let num2 = 0;
 let currentOperator = '';
-let gotNum1 = false; //reset when clear 
+let gotOperand = false; //reset when clear 
 
 const numberKeys = document.querySelectorAll('.number.key');
 const operatorKeys = document.querySelectorAll('.operator.key');
@@ -20,8 +20,10 @@ numberKeys.forEach(key => {
 });
 
 function getNumber(number){
-    if (resultScreen.textContent === '0' || gotNum1 === true)
+    if (resultScreen.textContent === '0' || gotOperand === true){
+        gotOperand = false; //reverts back to false to enable concat of numbers
         resultScreen.textContent = number;
+    }
     else
         resultScreen.textContent += number; 
 }
@@ -37,7 +39,7 @@ function getOperator(operator){
     currentOperator = operator;
     feedbackScreen.textContent = `${num1}` + ` ${currentOperator}`
     num2 = parseFloat(resultScreen.textContent);
-    gotNum1 = true; //trigger that num1 has already been stored and reset the screen when new number enter
+    gotOperand = true; //trigger that num1 has already been stored and reset the screen when new number enters
 }
 
 equalsKey.addEventListener('click', () => {
