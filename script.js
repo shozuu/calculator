@@ -1,8 +1,7 @@
 let num1 = 0;
 let num2 = 0;
-let initialOperator = '';
-let currentOperator = '';
-let gotOperand = false; //reset when clear 
+let currentOperator = null;
+let gotOperand = false; //reset when clear
 
 const numberKeys = document.querySelectorAll('.number.key');
 const operatorKeys = document.querySelectorAll('.operator.key');
@@ -36,19 +35,16 @@ operatorKeys.forEach(operator => {
 });
 
 function getOperator(operator){
-    num1 = parseFloat(resultScreen.textContent);
-
-    initialOperator = currentOperator;
+    num1 = parseFloat(resultScreen.textContent); //only once happens; use if then
     currentOperator = operator;
 
-    feedbackScreen.textContent = `${num1}` + ` ${currentOperator}`
-    num2 = parseFloat(resultScreen.textContent);
-    gotOperand = true; //trigger that num1 has already been stored and reset the screen when new number enters
+    feedbackScreen.textContent = `${num1}` + ` ${currentOperator}`;
+    gotOperand = true; 
 }
 
-equalsKey.addEventListener('click', getOperate)
+equalsKey.addEventListener('click', setOperate)
 
-function getOperate(){
+function setOperate(){
     num2 = parseFloat(resultScreen.textContent);
     feedbackScreen.textContent = `${num1}` + ` ${currentOperator} ` + `${num2} =`;
     resultScreen.textContent = `${operate(currentOperator, num1, num2)}`
@@ -58,31 +54,15 @@ function operate(operator, a, b){
     switch(operator)
     {
         case '+':
-            return add(a, b);
+            return a + b;
 
         case '-':
-            return subtract(a, b);
+            return a - b;
 
         case 'x':
-            return multiply(a, b);
+            return a * b;
 
         case '÷':
-            return divide(a, b);
+            return a / b;
     }
-}
-
-function add(a, b){
-    return a + b;
-}
-
-function subtract(a, b){
-    return a - b;
-}
-
-function multiply(a, b){
-    return a * b;
-}
-
-function divide(a, b){
-    return a / b;
 }
