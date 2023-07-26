@@ -1,6 +1,6 @@
-let num1 = 0;
-let num2 = 0;
-let currentOperator = null;
+let currentOperand = '';
+let previousOperand = '';
+let currentOperator = '';
 let gotOperand = false; //reset when clear
 
 const numberKeys = document.querySelectorAll('.number.key');
@@ -26,6 +26,8 @@ function getNumber(number){
     }
     else
         resultScreen.textContent += number; 
+
+    currentOperand = parseFloat(resultScreen.textContent); 
 }
 
 operatorKeys.forEach(operator => {
@@ -35,34 +37,49 @@ operatorKeys.forEach(operator => {
 });
 
 function getOperator(operator){
-    num1 = parseFloat(resultScreen.textContent); //only once happens; use if then
-    currentOperator = operator;
+    if (currentOperand === '') return; // if the currentOperand is empty and an operator is clicked, it does nothing (return)
 
-    feedbackScreen.textContent = `${num1}` + ` ${currentOperator}`;
+    if (previousOperand !== '' && currentOperand !== '') setOperate(); //if previousOperand already has value and there is a value in currentOperand the moment an operator is pressed, setOperate() is called to compute them first
+//prev is num 1 || current is num2
+
+    currentOperator = operator;
+    previousOperand = currentOperand;
+    currentOperand = '';
+    feedbackScreen.textContent = `${previousOperand}  ${currentOperator}`;
     gotOperand = true; 
+    // num2 = parseFloat(resultScreen.textContent);
 }
 
 equalsKey.addEventListener('click', setOperate)
 
 function setOperate(){
-    num2 = parseFloat(resultScreen.textContent);
-    feedbackScreen.textContent = `${num1}` + ` ${currentOperator} ` + `${num2} =`;
-    resultScreen.textContent = `${operate(currentOperator, num1, num2)}`
-}
+    let answer;
+    if (typeof previousOperand === 'string' || typeof currentOperand === 'string') return;
 
-function operate(operator, a, b){
-    switch(operator)
+    switch(currentOperator)
     {
         case '+':
-            return a + b;
+            answer = previousOperand + currentOperand;
+            break;
 
         case '-':
-            return a - b;
+            answer = previousOperand - currentOperand;
+            break;
 
         case 'x':
-            return a * b;
+            answer = previousOperand * currentOperand;
+            break;
 
         case '÷':
-            return a / b;
+            answer = previousOperand / currentOperand;
+            break;
+        default:
+            return;
     }
+
+    feedbackScreen.textContent = `${previousOperand}  ${currentOperator}  ${currentOperand} =`;
+    resultScreen.textContent = answer;
+    currentOperator = '';
+    currentOperand = answer;
+    previousOperand = '';
 }
