@@ -12,6 +12,15 @@ const equalsKey = document.querySelector('.equals');
 const feedbackScreen = document.querySelector('.feedback')
 const resultScreen = document.querySelector('.result');
 
+clearKey.addEventListener('click', () => {
+    currentOperand = '';
+    previousOperand = '';
+    currentOperator = '';
+    gotOperand = false;
+    resultScreen.textContent = '0';
+    feedbackScreen.textContent = '';
+})
+
 
 numberKeys.forEach(key => {
     key.addEventListener('click', (e) => {
