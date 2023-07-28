@@ -37,17 +37,23 @@ operatorKeys.forEach(operator => {
 });
 
 function getOperator(operator){
-    if (currentOperand === '') return; // if the currentOperand is empty and an operator is clicked, it does nothing (return)
+    if (currentOperand === ''){
+        if (previousOperand !== ''){
+            currentOperator = operator;
+            feedbackScreen.textContent = `${previousOperand}  ${currentOperator}`;
+            return;
+        }
+        else
+            return;
+    }
 
     if (previousOperand !== '' && currentOperand !== '') setOperate(); //if previousOperand already has value and there is a value in currentOperand the moment an operator is pressed, setOperate() is called to compute them first
-//prev is num 1 || current is num2
 
     currentOperator = operator;
     previousOperand = currentOperand;
     currentOperand = '';
     feedbackScreen.textContent = `${previousOperand}  ${currentOperator}`;
-    gotOperand = true; 
-    // num2 = parseFloat(resultScreen.textContent);
+    gotOperand = true;
 }
 
 equalsKey.addEventListener('click', setOperate)
