@@ -21,6 +21,15 @@ clearKey.addEventListener('click', () => {
     feedbackScreen.textContent = '';
 })
 
+deleteKey.addEventListener('click', () => {
+    resultScreen.textContent = resultScreen.textContent.slice(0, -1);
+
+    if (resultScreen.textContent === ''){
+        resultScreen.textContent = '0';
+    }
+        
+    currentOperand = parseFloat(resultScreen.textContent); 
+})
 
 numberKeys.forEach(key => {
     key.addEventListener('click', (e) => {
