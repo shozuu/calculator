@@ -20,12 +20,14 @@ numberKeys.forEach(key => {
 });
 
 function getNumber(number){
+    if (number === '.' && currentOperand.toString().includes('.')) return;
+
     if (resultScreen.textContent === '0' || gotOperand === true){
         gotOperand = false; //reverts back to false to enable concat of numbers
         resultScreen.textContent = number;
     }
     else
-        resultScreen.textContent += number; 
+        resultScreen.textContent += number;
 
     currentOperand = parseFloat(resultScreen.textContent); 
 }
