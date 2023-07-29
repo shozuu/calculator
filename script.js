@@ -102,7 +102,8 @@ function setOperate(){
         default:
             return;
     }
-
+    
+    answer = parseFloat(answer.toFixed(3));
     feedbackScreen.textContent = `${previousOperand}  ${currentOperator}  ${currentOperand} =`;
     resultScreen.textContent = answer;
     currentOperator = '';
