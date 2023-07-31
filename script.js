@@ -28,8 +28,45 @@ operatorKeys.forEach(operator => {
 equalsKey.addEventListener('click', setOperate)
 
 //keyboard functionality
+window.addEventListener('keydown', (event) => {
+    let key = event.key;
 
-
+     
+    switch(key)
+    {
+        case 'Delete':
+            allClear();
+            break;
+        case 'Backspace':
+            Delete();
+            break;
+        case '.':
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            getNumber(event.key);
+            break;
+        case '*':
+        case '+':
+        case '-':
+        case '/':
+            getOperator(event.key);
+            break;
+        case 'Enter':
+            setOperate();
+            break;
+        default:
+            break;
+    }
+    
+})
 
 //functions
 function allClear(){
@@ -61,7 +98,7 @@ function getNumber(number){
     else
         resultScreen.textContent += number;
 
-    currentOperand = parseFloat(resultScreen.textContent); 
+    currentOperand = resultScreen.textContent; 
 }
 
 function getOperator(operator){
@@ -86,6 +123,9 @@ function getOperator(operator){
 
 function setOperate(){
     let answer;
+    previousOperand = parseFloat(previousOperand);
+    currentOperand = parseFloat(currentOperand);
+
     if (typeof previousOperand === 'string' || typeof currentOperand === 'string') return;
 
     switch(currentOperator)
@@ -99,10 +139,12 @@ function setOperate(){
             break;
 
         case 'x':
+        case '*':
             answer = previousOperand * currentOperand;
             break;
 
         case '÷':
+        case '/':
             answer = previousOperand / currentOperand;
             break;
         default:
