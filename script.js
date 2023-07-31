@@ -12,14 +12,16 @@ const equalsKey = document.querySelector('.equals');
 const feedbackScreen = document.querySelector('.feedback')
 const resultScreen = document.querySelector('.result');
 
-clearKey.addEventListener('click', () => {
+clearKey.addEventListener('click', allClear);
+
+function allClear(){
     currentOperand = '';
     previousOperand = '';
     currentOperator = '';
     gotOperand = false;
     resultScreen.textContent = '0';
     feedbackScreen.textContent = '';
-})
+}
 
 deleteKey.addEventListener('click', () => {
     resultScreen.textContent = resultScreen.textContent.slice(0, -1);
@@ -102,7 +104,13 @@ function setOperate(){
         default:
             return;
     }
-    
+
+    if (answer === Infinity || isNaN(answer)){
+        alert('Cannot divide by 0');
+        allClear();
+        return;
+    }
+
     answer = parseFloat(answer.toFixed(3));
     feedbackScreen.textContent = `${previousOperand}  ${currentOperator}  ${currentOperand} =`;
     resultScreen.textContent = answer;
