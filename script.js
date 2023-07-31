@@ -12,8 +12,26 @@ const equalsKey = document.querySelector('.equals');
 const feedbackScreen = document.querySelector('.feedback')
 const resultScreen = document.querySelector('.result');
 
+//click functionality
 clearKey.addEventListener('click', allClear);
+deleteKey.addEventListener('click', Delete)
+numberKeys.forEach(key => {
+    key.addEventListener('click', (e) => {
+        getNumber(e.target.textContent)
+    })
+});
+operatorKeys.forEach(operator => {
+    operator.addEventListener('click', (e) => {
+        getOperator(e.target.textContent)
+    })
+});
+equalsKey.addEventListener('click', setOperate)
 
+//keyboard functionality
+
+
+
+//functions
 function allClear(){
     currentOperand = '';
     previousOperand = '';
@@ -23,7 +41,7 @@ function allClear(){
     feedbackScreen.textContent = '';
 }
 
-deleteKey.addEventListener('click', () => {
+function Delete(){
     resultScreen.textContent = resultScreen.textContent.slice(0, -1);
 
     if (resultScreen.textContent === ''){
@@ -31,13 +49,7 @@ deleteKey.addEventListener('click', () => {
     }
         
     currentOperand = parseFloat(resultScreen.textContent); 
-})
-
-numberKeys.forEach(key => {
-    key.addEventListener('click', (e) => {
-        getNumber(e.target.textContent)
-    })
-});
+}
 
 function getNumber(number){
     if (number === '.' && currentOperand.toString().includes('.')) return;
@@ -51,12 +63,6 @@ function getNumber(number){
 
     currentOperand = parseFloat(resultScreen.textContent); 
 }
-
-operatorKeys.forEach(operator => {
-    operator.addEventListener('click', (e) => {
-        getOperator(e.target.textContent)
-    })
-});
 
 function getOperator(operator){
     if (currentOperand === ''){
@@ -77,8 +83,6 @@ function getOperator(operator){
     feedbackScreen.textContent = `${previousOperand}  ${currentOperator}`;
     gotOperand = true;
 }
-
-equalsKey.addEventListener('click', setOperate)
 
 function setOperate(){
     let answer;
