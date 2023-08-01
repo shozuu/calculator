@@ -11,8 +11,10 @@ const deleteKey = document.querySelector('.delete');
 const equalsKey = document.querySelector('.equals');
 const feedbackScreen = document.querySelector('.feedback')
 const resultScreen = document.querySelector('.result');
+const signKey = document.querySelector('.sign');
 
 //click functionality
+signKey.addEventListener('click', modifySign);
 clearKey.addEventListener('click', allClear);
 deleteKey.addEventListener('click', Delete)
 numberKeys.forEach(key => {
@@ -69,6 +71,17 @@ window.addEventListener('keydown', (event) => {
 })
 
 //functions
+function modifySign() {
+    if (currentOperand === '') return;
+
+    if (currentOperand.includes('-')) {
+        currentOperand = currentOperand.slice(1);
+    } else {
+        currentOperand = '-' + currentOperand;
+    }
+    resultScreen.textContent = currentOperand;
+}
+
 function allClear(){
     currentOperand = '';
     previousOperand = '';
@@ -90,7 +103,7 @@ function Delete(){
 
 function getNumber(number){
     if (currentOperand.length === 13){
-        alert('display limit reached')
+        alert('Display limit reached')
         return;
     }
 
@@ -157,7 +170,7 @@ function setOperate(){
     }
 
     if (answer === Infinity || isNaN(answer)){
-        alert('Cannot divide by 0');
+        alert('Invalid Expression');
         allClear();
         return;
     }
