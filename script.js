@@ -74,12 +74,12 @@ window.addEventListener('keydown', (event) => {
 function modifySign() {
     if (currentOperand === '') return;
 
-    if (currentOperand.includes('-')) {
-        currentOperand = currentOperand.slice(1);
+    if (resultScreen.textContent.includes('-')) {
+        resultScreen.textContent = resultScreen.textContent.slice(1);
     } else {
-        currentOperand = '-' + currentOperand;
+        resultScreen.textContent = '-' + resultScreen.textContent;
     }
-    resultScreen.textContent = currentOperand;
+    currentOperand = resultScreen.textContent;
 }
 
 function allClear(){
