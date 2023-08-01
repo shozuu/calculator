@@ -12,6 +12,8 @@ html,
 body {
     height: 100%;
     font-family: 'Klee One', cursive;
+    font-family: 'Poppins', sans-serif;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,7 +35,7 @@ body {
     width: 350px;
     border-radius: 5px;
     padding: 20px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,25 +43,60 @@ body {
 }
 
 .feedback{
-    color: white;
+    color: rgba(251, 251, 251, 0.50);;
 }
 
 .result {
     font-size: 40px;
+    font-weight: 600;
     color: white;
 }
 
 .key-container{
     width: 423px;
-    height: 537px;
-    flex-shrink: 0;
-    border-radius: 40px;
+    height: 500px;
+    padding: 34px 34px 58px 34px;
     background-image: linear-gradient(72deg, #091C4A 0%, #1a4d7d 100%, #091C4A 0%);
+
+    border-radius: 40px;
     box-shadow: 0px -5px 70px 0px rgba(0, 0, 0, 0.10);
+    
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
+    justify-content: center;
+    /* align-items: center; */
     flex-wrap: wrap;
     user-select: none;
+}
+
+.main-group{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modifier-keys{
+
+    display: flex;
+    gap: 25px;
+    background-color: rgba(5, 5, 5, 0.30);
+    border-radius: 40px;
+    box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.05);
+}
+
+.sub-group{
+    display: flex;
+    gap: 25px;
+}
+
+.group{
+    width: 70px;
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
 .key{
@@ -67,13 +104,36 @@ body {
     width: 70px;
     font-size: 20px;
     font-weight: 600;
-    color: white;
-    background-color: rgba(5, 5, 5, 0.30);
-    
+    color: white;    
     border-radius: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     user-select: none;
+}
+
+.key:hover{
+    background-color:#133e65;
+}
+
+.number,
+.equals{
+    background-color: rgba(5, 5, 5, 0.30);
+}
+
+.operators{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(5, 5, 5, 0.30);
+    border-radius: 40px;
+    box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.05);
+}
+
+.rectangle{
+    width: 175px;
+    height: 5px;
+    border-radius: 25px;
+    background: #3D76AB;
 }
