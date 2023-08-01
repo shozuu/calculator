@@ -89,6 +89,11 @@ function Delete(){
 }
 
 function getNumber(number){
+    if (currentOperand.length === 13){
+        alert('display limit reached')
+        return;
+    }
+
     if (number === '.' && currentOperand.toString().includes('.')) return;
 
     if (resultScreen.textContent === '0' || gotOperand === true){
